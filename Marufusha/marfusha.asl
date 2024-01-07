@@ -1,7 +1,7 @@
 // ver1.0.0
 
 // ------------------------------------------------------------ //
-// 			Initialization
+//             Initialization
 // ------------------------------------------------------------ //
 
 state("Marfusha", "ver1.2.1")
@@ -47,20 +47,20 @@ state("Marfusha", "ver1.2.1")
 
 startup
 {
-	// settings
+    // settings
 
     // main
-	settings.Add("main", true, "Main mode");
+    settings.Add("main", true, "Main mode");
     for (int index = 1; index < 10; ++index)
-	{
-		settings.Add("day" + (index * 10).ToString(), true, "Day " + (index * 10).ToString(), "main");
-	}
+    {
+        settings.Add("day" + (index * 10).ToString(), true, "Day " + (index * 10).ToString(), "main");
+    }
     settings.Add("day99", false, "Day 99", "main");
     settings.Add("day100", true, "Day 100 (Timer Stop)", "main");
     settings.Add("mainEveryDay", false, "Split at every day", "main");
 
     // challenge
-	settings.Add("challenge", false, "Challenge mode");
+    settings.Add("challenge", false, "Challenge mode");
     settings.Add("ch_x5", false, "Split at every x5 days (05, 15, 25, ...)", "challenge");
     settings.Add("ch_x0", true, "Split at every x0 days (10, 20, 30, ...)", "challenge");
     settings.Add("chEveryDay", false, "Split at every day", "challenge");
@@ -68,20 +68,20 @@ startup
 
 init
 {
-	// ver check
+    // ver check
     var module = modules.First();
-	print("ModuleMemorySize : " + module.ModuleMemorySize.ToString());
+    print("ModuleMemorySize : " + module.ModuleMemorySize.ToString());
     print("FileVersion \t: " + module.FileVersionInfo.FileVersion);
     print("ProcessName \t: " + game.ProcessName.ToLower());
     switch (module.ModuleMemorySize)
-	{
-		case 675840:
-			version = "ver1.2.1";
-			break;
-		default:
-        	version = "ver unknown";
-			break;
-	}
+    {
+        case 675840:
+            version = "ver1.2.1";
+            break;
+        default:
+            version = "ver unknown";
+            break;
+    }
 
     // for init
 
@@ -101,7 +101,7 @@ init
 }
 
 // ------------------------------------------------------------ //7
-// 			Action
+//             Action
 // ------------------------------------------------------------ //
 
 update
@@ -188,8 +188,8 @@ update
     }
 
     // for timer
-	if (version == "ver unknown")
-		return false;
+    if (version == "ver unknown")
+        return false;
 
     vars.needStart = false;
     vars.needSplit = false;
@@ -289,5 +289,5 @@ start
 }
 
 // ------------------------------------------------------------ //
-// 			EOF
+//             EOF
 // ------------------------------------------------------------ //

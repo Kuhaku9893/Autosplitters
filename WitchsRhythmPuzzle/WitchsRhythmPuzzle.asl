@@ -1,7 +1,7 @@
 // ver1.0.0
 
 // ------------------------------------------------------------ //
-// 			Initialization
+//             Initialization
 // ------------------------------------------------------------ //
 
 state("Witch'sRhythmPuzzle")
@@ -54,30 +54,30 @@ startup
     foreach (KeyValuePair<string, string> stageName in vars.stageName_all)
     {
         settings.Add(stageName.Key, true, stageName.Value, "AllStages");
-	}
+    }
 
     settings.Add("Nonstop", true, "Nonstop");
     foreach (KeyValuePair<string, string> stageName in vars.stageName_nonstop)
     {
         settings.Add(stageName.Key, true, stageName.Value, "Nonstop");
-	}
+    }
 }
 
 init
 {
     var module = modules.First();
-	print("ModuleMemorySize : " + module.ModuleMemorySize.ToString());
+    print("ModuleMemorySize : " + module.ModuleMemorySize.ToString());
     print("FileVersion \t: " + module.FileVersionInfo.FileVersion);
     print("ProcessName \t: " + game.ProcessName.ToLower());
-	switch (module.ModuleMemorySize)
-	{
-		case 827392:
-			version = "ver1.03";
-			break;
-		default:
-			version = "unknown";
-			break;
-	}
+    switch (module.ModuleMemorySize)
+    {
+        case 827392:
+            version = "ver1.03";
+            break;
+        default:
+            version = "unknown";
+            break;
+    }
 
     // vars init
     vars.clearedStageMap = new Dictionary<string, bool>();
@@ -96,13 +96,13 @@ init
 }
 
 // ------------------------------------------------------------ //
-// 			Action
+//             Action
 // ------------------------------------------------------------ //
 
 update
 {
-	if (version == "unknown")
-		return false;
+    if (version == "unknown")
+        return false;
 
     current.SceneName = vars.Helper.Scenes.Active.Name;
 }
@@ -178,5 +178,5 @@ split
 }
 
 // ------------------------------------------------------------ //
-// 			EOF
+//             EOF
 // ------------------------------------------------------------ //
