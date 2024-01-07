@@ -4,6 +4,7 @@
 ## 主な機能
 
 Donut Dodo用のAutoplitterです。
+IGT計測も行います。
 
 カテゴリはSugar Rush SpeedrunとAll Difficultiesに対応しており、Settingsにてモードの切り替えを行います。
 
