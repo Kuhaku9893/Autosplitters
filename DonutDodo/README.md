@@ -36,6 +36,7 @@ All Difficulties Modeのチェック
 
 1. Splits EditorのTitleに「Donut Dodo」と入力します。
 1. Activateボタンを押します。
+1. 必要に応じてSettingsボタンを押して設定を行います。
 
 LivesplitにIGTを表示するには、LivesplitのTiming Method設定をGame Timeにする必要があります。
 

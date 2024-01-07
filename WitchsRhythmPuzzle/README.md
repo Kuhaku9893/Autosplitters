@@ -36,6 +36,7 @@
 
 1. Splits EditorのTitleに「Witch's Rhythm Puzzle」と入力します。
 1. Activateボタンを押します。
+1. 必要に応じてSettingsボタンを押して設定を行います。
 
 ## 既知の不具合・仕様
 
