@@ -97,7 +97,7 @@ split
 {
     if (settings["AllDifficulty"] && (old.stage == 5))
     {
-        if ((current.stage == 1) && (old.stage == 5))
+        if ((current.igt == 0.0) && (old.igt > 0.0))
         {
             vars.beforeDifficultyTime += old.igt;
             return true;
