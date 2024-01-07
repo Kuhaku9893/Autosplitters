@@ -35,7 +35,7 @@ All Difficulties Modeのチェック
 
 ## aslの使用方法
 
-1. Splits EditorのTitleに「Donut Dodo」と入力します。
+1. Splits EditorのGame Nameに「Donut Dodo」と入力します。
 1. Activateボタンを押します。
 1. 必要に応じてSettingsボタンを押して設定を行います。
 
