@@ -51,9 +51,10 @@
 
 ## aslの使用方法
 
-1. Splits EditorのTitleに「Marfusha」と入力します。
-1. Activateボタンを押します。
-1. 必要に応じてSettingsボタンを押して設定を行います。
+現在データベースに登録準備中
+1. ~~Splits EditorのTitleに「Marfusha」と入力します。~~
+1. ~~Activateボタンを押します。~~
+1. ~~必要に応じてSettingsボタンを押して設定を行います。~~
 
 
 ## 既知の不具合・仕様
