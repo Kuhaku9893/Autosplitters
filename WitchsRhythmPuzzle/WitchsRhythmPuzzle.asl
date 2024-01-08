@@ -134,9 +134,6 @@ start
     if (current.SceneName != "event" || old.SceneName == "event")
         return false;
 
-    if (settings["stageSelect"] && current.nonstop == 1)
-        return false;
-
     // all stages
     if (current.stage == 1 && current.nonstop == 0)
         return true;
