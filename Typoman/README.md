@@ -20,12 +20,17 @@ Typoman用のAutosplitterです。
 - ver 1.10
 
 
-## aslの使用方法
+## Autosplitterの使用方法
 
-現在データベースに登録準備中
-1. ~~Splits EditorのGame Nameに「Typoman」と入力します。~~
-1. ~~Activateボタンを押します。~~
-1. ~~必要に応じてSettingsボタンを押して設定を行います。~~
+### 設定手順
+
+1. Splits EditorのGame Nameに「Typoman」と入力します。
+1. Activateボタンを押します。
+1. 必要に応じてSettingsボタンを押して設定を行います。
+
+### Autosplitterの重複に注意
+
+AutosplitterはSplits Editorから使用する上記の方法と、Layout Editorから使用する方法とがありますが、一度に使用するAutosplitterは1つのみとしてください。
 
 
 ## 既知の不具合・仕様
