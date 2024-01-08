@@ -33,16 +33,24 @@ All Difficulties Modeのチェック
 - ver1.39
 
 
-## aslの使用方法
+## Autosplitterの使用方法
+
+### 設定手順
 
 1. Splits EditorのGame Nameに「Donut Dodo」と入力します。
 1. Activateボタンを押します。
 1. 必要に応じてSettingsボタンを押して設定を行います。
 
+### IGT計測
+
 LivesplitにIGTを表示するには、LivesplitのTiming Method設定をGame Timeにする必要があります。
 
 Autosplitter起動時にLivesplitのTiming Method設定がReal Timeだったら、Game Timeに変更するためのダイアログを表示します。
 Game Timeに変更したい場合は「はい」を選択してください。
+
+### Autosplitterの重複に注意
+
+AutosplitterはSplits Editorから使用する上記の方法と、Layout Editorから使用する方法とがありますが、一度に使用するAutosplitterは1つのみとしてください。
 
 
 ## 既知の不具合・仕様
