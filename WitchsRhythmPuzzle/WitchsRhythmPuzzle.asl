@@ -1,4 +1,4 @@
-// ver1.0.0
+// ver1.0.1
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -85,11 +85,10 @@ init
     vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
     {
         // for start, split
-        var b = mono["tonibanmen"];
-        vars.Helper["stage"] = mono.Make<int>(b, "stage");
-        vars.Helper["hard"] = mono.Make<int>(b, "hard");
-        vars.Helper["nonstop"] = mono.Make<int>(b, "nonstop");
-        vars.Helper["kachimakemoji"] = mono.Make<int>(b, "kachimakemoji");
+        vars.Helper["stage"] = mono.Make<int>("tonibanmen", "stage");
+        vars.Helper["hard"] = mono.Make<int>("tonibanmen", "hard");
+        vars.Helper["nonstop"] = mono.Make<int>("tonibanmen", "nonstop");
+        vars.Helper["kachimakemoji"] = mono.Make<int>("tonibanmen", "kachimakemoji");
 
         return true;
     });
@@ -105,6 +104,25 @@ update
         return false;
 
     current.SceneName = vars.Helper.Scenes.Active.Name;
+
+#if true
+    // vars
+    Action<string, string, string> LogString = (currentValue, oldValue, text) => 
+    {
+        if (currentValue != oldValue)
+            print(text + " : " + currentValue);
+    };
+    Action<int, int, string> LogInt = (currentValue, oldValue, text) => 
+    {
+        if (currentValue != oldValue)
+            print(text + " : " + currentValue);
+    };
+    LogString(current.SceneName, old.SceneName, "SceneName");
+    LogInt(   current.stage,     old.stage,     "stage");
+    LogInt(   current.hard,      old.hard,      "hard");
+    LogInt(   current.nonstop,   old.nonstop,   "nonstop");
+    LogInt(   current.kachimakemoji, old.kachimakemoji, "kachimakemoji");
+#endif
 }
 
 onStart
