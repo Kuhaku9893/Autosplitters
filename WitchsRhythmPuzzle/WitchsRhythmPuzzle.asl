@@ -8,13 +8,15 @@ state("Witch'sRhythmPuzzle")
 {
     // memSize : 827392
     // filever : 2020.3.45.6687953
+
+    int stage:          "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x20;
+    int hard:           "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x34;
+    int nonstop:        "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x60;
+    int kachimakemoji:  "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x78;
 }
 
 startup
 {
-    Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-    vars.Helper.LoadSceneManager = true;
-
     // isHard - stage, name
     vars.stageName_all = new Dictionary<string, string>() {
         {"0-1",  "Entail(Normal)"},
@@ -81,17 +83,6 @@ init
 
     // vars init
     vars.clearedStageMap = new Dictionary<string, bool>();
-
-    vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
-    {
-        // for start, split
-        vars.Helper["stage"] = mono.Make<int>("tonibanmen", "stage");
-        vars.Helper["hard"] = mono.Make<int>("tonibanmen", "hard");
-        vars.Helper["nonstop"] = mono.Make<int>("tonibanmen", "nonstop");
-        vars.Helper["kachimakemoji"] = mono.Make<int>("tonibanmen", "kachimakemoji");
-
-        return true;
-    });
 }
 
 // ------------------------------------------------------------ //
@@ -102,8 +93,6 @@ update
 {
     if (version == "unknown")
         return false;
-
-    current.SceneName = vars.Helper.Scenes.Active.Name;
 
 #if true
     // vars
@@ -117,7 +106,7 @@ update
         if (currentValue != oldValue)
             print(text + " : " + currentValue);
     };
-    LogString(current.SceneName, old.SceneName, "SceneName");
+    // LogString(current.SceneName, old.SceneName, "SceneName");
     LogInt(   current.stage,     old.stage,     "stage");
     LogInt(   current.hard,      old.hard,      "hard");
     LogInt(   current.nonstop,   old.nonstop,   "nonstop");
@@ -149,8 +138,8 @@ onStart
 
 start
 {
-    if (current.SceneName != "event" || old.SceneName == "event")
-        return false;
+    // if (current.SceneName != "event" || old.SceneName == "event")
+        // return false;
 
     // all stages
     if (current.stage == 1 && current.nonstop == 0)
@@ -168,8 +157,8 @@ reset
 
 split
 {
-    if (current.SceneName != "main")
-        return false;
+    // if (current.SceneName != "main")
+        // return false;
 
     // for split
     if ((current.kachimakemoji != 1) || (old.kachimakemoji != 0))
