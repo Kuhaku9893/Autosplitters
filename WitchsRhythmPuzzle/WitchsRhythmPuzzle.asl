@@ -81,6 +81,31 @@ init
             break;
     }
 
+    // Sig scan
+    var UnityPlayer = modules.FirstOrDefault(m => m.ModuleName == "UnityPlayer.dll");
+    var UnityPlayerScanner = new SignatureScanner(game, UnityPlayer.BaseAddress, UnityPlayer.ModuleMemorySize);
+
+    var SceneManager = IntPtr.Zero;
+    var SceneManagerSig = new SigScanTarget(1, "A1 ?? ?? ?? ?? 53 33 DB 89 45");
+    SceneManagerSig.OnFound = (p, s, ptr) => p.ReadPointer(ptr);
+
+    int scanAttempts = 0;
+    while (scanAttempts++ < 50)
+        if ((SceneManager = UnityPlayerScanner.Scan(SceneManagerSig)) != IntPtr.Zero) break;
+
+    if (!(vars.SigFound = SceneManager != IntPtr.Zero)) return;
+
+    Func<string, string> PathToName = (path) =>
+    {
+        if (String.IsNullOrEmpty(path) || !path.StartsWith("Assets/")) return null;
+        else return System.Text.RegularExpressions.Regex.Matches(path, @".+/(.+).unity")[0].Groups[1].Value;
+    };
+
+    vars.UpdateScenes = (Action) (() =>
+    {
+        current.SceneName = PathToName(new DeepPointer(SceneManager, 0x2C, 0x0, 0xC, 0x0).DerefString(game, 26)) ?? old.SceneName;
+    });
+
     // vars init
     vars.clearedStageMap = new Dictionary<string, bool>();
 }
@@ -94,6 +119,11 @@ update
     if (version == "unknown")
         return false;
 
+    if (!vars.SigFound)
+        return false;
+
+    vars.UpdateScenes();
+
 #if true
     // vars
     Action<string, string, string> LogString = (currentValue, oldValue, text) => 
@@ -106,7 +136,7 @@ update
         if (currentValue != oldValue)
             print(text + " : " + currentValue);
     };
-    // LogString(current.SceneName, old.SceneName, "SceneName");
+    LogString(current.SceneName, old.SceneName, "SceneName");
     LogInt(   current.stage,     old.stage,     "stage");
     LogInt(   current.hard,      old.hard,      "hard");
     LogInt(   current.nonstop,   old.nonstop,   "nonstop");
@@ -138,8 +168,8 @@ onStart
 
 start
 {
-    // if (current.SceneName != "event" || old.SceneName == "event")
-        // return false;
+    if (current.SceneName != "event" || old.SceneName == "event")
+        return false;
 
     // all stages
     if (current.stage == 1 && current.nonstop == 0)
@@ -157,8 +187,8 @@ reset
 
 split
 {
-    // if (current.SceneName != "main")
-        // return false;
+    if (current.SceneName != "main")
+        return false;
 
     // for split
     if ((current.kachimakemoji != 1) || (old.kachimakemoji != 0))
