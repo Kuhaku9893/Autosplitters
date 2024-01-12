@@ -1,9 +1,9 @@
-// ver1.1.0
+// ver1.1.1
 // ------------------------------------------------------------ //
 //             Initialization
 // ------------------------------------------------------------ //
 
-state("Witch'sRhythmPuzzle")
+state("Witch'sRhythmPuzzle", "ver1.04")
 {
     // memSize : 827392
     // filever : 2020.3.45.6687953
@@ -73,7 +73,7 @@ init
     switch (module.ModuleMemorySize)
     {
         case 827392:
-            version = "ver1.03";
+            version = "ver1.04";
             break;
         default:
             version = "unknown";
