@@ -1,5 +1,4 @@
-// ver1.0.1
-
+// ver1.1.0
 // ------------------------------------------------------------ //
 //             Initialization
 // ------------------------------------------------------------ //
@@ -148,21 +147,15 @@ onStart
 {
     vars.clearedStageMap.Clear();
     
-    if (current.nonstop == 0)
+    var stageNames = vars.stageName_all.Keys;
+    if (current.nonstop == 1)
     {
-        foreach (string stageId in vars.stageName_all.Keys)
-        {
-            // print("-- onStart Add : " + stageId);
-            vars.clearedStageMap.Add(stageId, false);
-        }
+        stageNames = vars.stageName_nonstop.Keys;
     }
-    else
+    foreach (string stageId in stageNames)
     {
-        foreach (string stageId in vars.stageName_nonstop.Keys)
-        {
-            // print("-- onStart Add : " + stageId);
-            vars.clearedStageMap.Add(stageId, false);
-        }
+        // print("-- onStart Add : " + stageId);
+        vars.clearedStageMap.Add(stageId, false);
     }
 }
 
