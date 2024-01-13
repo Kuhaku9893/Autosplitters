@@ -6,7 +6,7 @@
 Donut Dodo用のAutoplitterです。
 IGT計測も行います。
 
-カテゴリはSugar Rush SpeedrunとAll Difficultiesに対応しており、Settingsにてモードの切り替えを行います。
+カテゴリはSugar Rush SpeedrunとAll Difficultiesに対応しており、Livesplit本体のカテゴリ情報を取得して動作モードの切り替えを行います。
 
 ### Sugar Rush Speedrun
 |自動操作|説明|
@@ -21,12 +21,6 @@ IGT計測も行います。
 |自動スタート|IGTがリセットされた瞬間<br>ゲーム起動直後などIGTが0の状態だと反応しません|
 |自動リセット|IGTがリセットされた瞬間<br>ステージ5でのみ手動でリセットしてください|
 |自動ラップ|ステージが切り替わった瞬間<br>ステージ5でのみIGTがリセットされた瞬間<br>タイマーストップは手動で行ってください|
-
-
-### 設定項目
-All Difficulties Modeのチェック
-- OFF：Sugar Rush Speedrunモードで動作します。
-- ON ：All Difficultiesモードで動作します。
 
 
 ### 対応バージョン
