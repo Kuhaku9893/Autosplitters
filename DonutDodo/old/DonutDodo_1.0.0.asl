@@ -1,4 +1,4 @@
-// ver1.1.0
+// ver1.0.0
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -30,6 +30,9 @@ startup
             timer.CurrentTimingMethod = TimingMethod.GameTime;
         }
     }
+
+    settings.Add("AllDifficulty", false, "All Difficulties Mode");
+    settings.SetToolTip("AllDifficulty", "In each difficulties, only the 5th stage needs to be reset manually.");
 }
 
 init
@@ -64,13 +67,11 @@ update
 {
     if (version == "Unknown")
         return false;
-
-    vars.isAllDifficulty = timer.Run.CategoryName == "All Difficulties";
 }
 
 start
 {
-    if (vars.isAllDifficulty)
+    if (settings["AllDifficulty"])
     {
         if (current.igt < old.igt)
             return true;
@@ -83,7 +84,7 @@ start
 
 reset
 {
-    if (vars.isAllDifficulty)
+    if (settings["AllDifficulty"])
     {
         if (old.stage == 5)
             return false;
@@ -94,7 +95,7 @@ reset
 
 split
 {
-    if (vars.isAllDifficulty && (old.stage == 5))
+    if (settings["AllDifficulty"] && (old.stage == 5))
     {
         if ((current.igt == 0.0) && (old.igt > 0.0))
         {
