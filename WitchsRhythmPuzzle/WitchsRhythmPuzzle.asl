@@ -1,4 +1,4 @@
-// ver1.1.1
+// ver1.1.2
 // ------------------------------------------------------------ //
 //             Initialization
 // ------------------------------------------------------------ //
@@ -12,6 +12,7 @@ state("Witch'sRhythmPuzzle", "ver1.04")
     int hard:           "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x34;
     int nonstop:        "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x60;
     int kachimakemoji:  "UnityPlayer.dll", 0x014E0D64, 0x2c8, 0x368, 0x74, 0x84, 0x4, 0x38, 0x78;
+    bool isEasy:        "UnityPlayer.dll", 0x014CCDCC, 0x84, 0x4, 0x98, 0x56c, 0x0, 0x38;
 }
 
 startup
@@ -107,6 +108,7 @@ init
 
     // vars init
     vars.clearedStageMap = new Dictionary<string, bool>();
+    vars.easyModeAlerted = false;
 }
 
 // ------------------------------------------------------------ //
@@ -123,24 +125,21 @@ update
 
     vars.UpdateScenes();
 
-#if true
-    // vars
-    Action<string, string, string> LogString = (currentValue, oldValue, text) => 
+    // easy mode alert
+    if (!vars.easyModeAlerted && current.isEasy)
     {
-        if (currentValue != oldValue)
-            print(text + " : " + currentValue);
-    };
-    Action<int, int, string> LogInt = (currentValue, oldValue, text) => 
-    {
-        if (currentValue != oldValue)
-            print(text + " : " + currentValue);
-    };
-    LogString(current.SceneName, old.SceneName, "SceneName");
-    LogInt(   current.stage,     old.stage,     "stage");
-    LogInt(   current.hard,      old.hard,      "hard");
-    LogInt(   current.nonstop,   old.nonstop,   "nonstop");
-    LogInt(   current.kachimakemoji, old.kachimakemoji, "kachimakemoji");
-#endif
+        vars.easyModeAlerted = true;
+        using (Form dummyForm = new Form())
+        {
+            dummyForm.TopMost = true;
+            MessageBox.Show (
+                dummyForm, "Easy mode now.",
+                "LiveSplit | Witch's Rhythm Puzzle",
+                MessageBoxButtons.OK,MessageBoxIcon.Exclamation
+            );
+            dummyForm.TopMost = false;
+        }
+    }
 }
 
 onStart
