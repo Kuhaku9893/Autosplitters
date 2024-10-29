@@ -2,7 +2,6 @@
 
 
 ## 主な機能
-
 Typoman用のAutosplitterです。
 
 ### All Tracks
@@ -23,23 +22,25 @@ Typoman用のAutosplitterです。
 ## Autosplitterの使用方法
 
 ### 設定手順
-
 1. Splits EditorのGame Nameに「Typoman」と入力します。
 1. Activateボタンを押します。
 1. 必要に応じてSettingsボタンを押して設定を行います。
 
-### Autosplitterの重複に注意
+### タイムの精査を推奨
+ルール通りのタイミングでのタイマー操作は保証していないため、タイムの精査を推奨しています。
 
+このAutosplitterは60Hzでゲームの内部値を監視することでタイマー操作タイミングを判定しています。<br>
+ゲームの内部値が変わったタイミングとルール上のスタートand orストップのタイミングとが厳密に一致するとは限らないため、ルール通りのタイミングでタイマー操作することは保証できません。
+
+### Autosplitterの重複に注意
 AutosplitterはSplits Editorから使用する上記の方法と、Layout Editorから使用する方法とがありますが、一度に使用するAutosplitterは1つのみとしてください。
 
 
 ## 既知の不具合・仕様
-
 - ラスボス撃破判定から0.5s後にタイマーストップする仕様（SRCルールにタイミングを合わせるため）ですが、環境によってルール上のストップタイミングとズレる場合があります。
 
 
 ## 連絡先
-
 ブログ：https://soushinsoujin989.blogspot.com/ <br>
 Twitter：https://twitter.com/Kuhaku81377446
 
@@ -48,7 +49,6 @@ Twitter：https://twitter.com/Kuhaku81377446
 
 
 ## 著作権と利用について
-
 - 本aslの製作者はKuhaku_玖白であり、著作権は製作者にあります。
 - 本aslはフリーソフトです。
 - 本aslの利用により何らかの損害等が発生しても製作者は責任を負いません。

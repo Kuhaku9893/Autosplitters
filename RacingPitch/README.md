@@ -2,7 +2,6 @@
 
 
 ## 主な機能
-
 Racing Pitch用のAutosplitterです。
 IGT計測も行います。
 
@@ -25,28 +24,29 @@ IGT計測も行います。
 ## Autosplitterの使用方法
 
 ### 設定手順
-
 1. Splits EditorのGame Nameに「Racing Pitch」と入力します。
 1. Activateボタンを押します。
 1. 必要に応じてSettingsボタンを押して設定を行います。
 
 ### IGT計測
-
 LivesplitにIGTを表示するには、LivesplitのTiming Method設定をGame Timeにする必要があります。
 
-### Autosplitterの重複に注意
+### タイムの精査を推奨
+ルール通りのタイミングでのタイマー操作は保証していないため、タイムの精査を推奨しています。
 
+このAutosplitterは60Hzでゲームの内部値を監視することでタイマー操作タイミングを判定しています。<br>
+ゲームの内部値が変わったタイミングとルール上のスタートand orストップのタイミングとが厳密に一致するとは限らないため、ルール通りのタイミングでタイマー操作することは保証できません。
+
+### Autosplitterの重複に注意
 AutosplitterはSplits Editorから使用する上記の方法と、Layout Editorから使用する方法とがありますが、一度に使用するAutosplitterは1つのみとしてください。
 
 
 ## 既知の不具合・仕様
-
 - タイマースタートは「いずれかのTrackをスタートして、ゲームの状態が「メニュー→Track」になった瞬間」であり、「Track1を選択してStartを押した瞬間」ではありません。<br>このため、ルール上の開始タイミングとズレが発生する可能性があります。
 - ウィンドウモード、キャラクターStemcell-Billの条件で、かつTrack1-4の範囲でしか動作確認をしていません。<br>他の条件での動作は確認しておりませんので、ご了承ください。
 
 
 ## 連絡先
-
 ブログ：https://soushinsoujin989.blogspot.com/ <br>
 Twitter：https://twitter.com/Kuhaku81377446
 
@@ -55,7 +55,6 @@ Twitter：https://twitter.com/Kuhaku81377446
 
 
 ## 著作権と利用について
-
 - 本aslの製作者はKuhaku_玖白であり、著作権は製作者にあります。
 - 本aslはフリーソフトです。
 - 本aslの利用により何らかの損害等が発生しても製作者は責任を負いません。
