@@ -1,4 +1,4 @@
-// ver1.0.1
+// ver1.0.0
 
 // ------------------------------------------------------------ //
 // 			Initialization
@@ -10,7 +10,6 @@ state("DolphinsHaveNoScales")
     // filever : 2021.3.20.5732503
     // MD5hash : 02FBCD6B5801447FCADD91644F6CB55C
 
-    // Main
     int state       : "mono-2.0-bdwgc.dll", 0x007280F8, 0x70, 0xf28, 0xec;
     int page        : "mono-2.0-bdwgc.dll", 0x007280F8, 0x70, 0xf28, 0xf0;
     int enemyCount  : "mono-2.0-bdwgc.dll", 0x007280F8, 0x70, 0xf28, 0xe4;
@@ -39,6 +38,7 @@ init
     {
         MD5Hash = md5.ComputeHash(s).Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
     }
+
     print("MD5hash : " + MD5Hash);
 }
 
@@ -74,7 +74,7 @@ reset
 
 split
 {
-    if (current.page <= 1)
+    if (current.page <= 0)
     {
         return false;
     }
