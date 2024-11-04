@@ -1,4 +1,4 @@
-// ver1.0.2
+// ver1.0.1
 
 // ------------------------------------------------------------ //
 // 			Initialization
@@ -103,17 +103,17 @@ split
             print("-- split each1--");
             return true;
         }
-        if (settings["each4"] && (current.page % 4 == 1))
+        if (settings["each4"] && (current.page % 4 == 0))
         {
             print("-- split each4--");
             return true;
         }
-        if (settings["each8"] && (current.page % 8 == 1))
+        if (settings["each8"] && (current.page % 8 == 0))
         {
             print("-- split each8--");
             return true;
         }
-        if (settings["each16"] && (current.page % 16 == 1))
+        if (settings["each16"] && (current.page % 16 == 0))
         {
             print("-- split each16--");
             return true;
