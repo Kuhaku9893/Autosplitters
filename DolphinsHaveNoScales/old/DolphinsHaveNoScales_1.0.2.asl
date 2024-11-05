@@ -1,4 +1,4 @@
-// ver1.0.3
+// ver1.0.2
 
 // ------------------------------------------------------------ //
 // 			Initialization
@@ -86,7 +86,6 @@ split
             print("-- stop Death% --");
             return true;
         }
-        return false;
     }
 
     // stop
