@@ -1,4 +1,4 @@
-// ver1.0.4
+// ver1.0.3
 
 // ------------------------------------------------------------ //
 // 			Initialization
@@ -74,7 +74,11 @@ reset
 
 split
 {
-    // Death%
+    if (current.page <= 1)
+    {
+        return false;
+    }
+
     if (timer.Run.CategoryName == "Death%")
     {
         if ((current.state == 4) && (old.state != 4))
@@ -82,11 +86,6 @@ split
             print("-- stop Death% --");
             return true;
         }
-        return false;
-    }
-
-    if (current.page <= 1)
-    {
         return false;
     }
 
