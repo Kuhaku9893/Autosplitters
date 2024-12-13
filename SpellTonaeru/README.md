@@ -31,8 +31,10 @@
 
 ### IGT 計測
 ゲーム内のクリアタイムを取得し、Livesplit の Game Time を同期します。
-このゲームのIGTは階段状に増加する仕様です。
-補完表示がONの時は、タイマー上ではIGTがリアルタイムにカウントされているように表示します。
+
+このゲームの IGT は階段状に増加する仕様です。
+
+補完表示が ON の時は、タイマー上では IGT がリアルタイムにカウントされているように表示します。
 
 ### 対応バージョン
 - Ver. 1.7.3
@@ -49,7 +51,7 @@
 ## Autosplitter の使用方法
 
 ### 設定手順
-1. Splits Editor の Game Name に「Spell Tonaeru」と入力します。
+1. Splits Editor の Game Name に「SpellTonaeru」と入力します。
 1. Activate ボタンを押します。
 1. 必要に応じて Settings ボタンを押して設定を行います。
 
