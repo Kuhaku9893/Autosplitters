@@ -1,4 +1,4 @@
-// ver1.1.0
+// ver1.1.1
 
 // ------------------------------------------------------------ //
 //          Initialization
@@ -123,7 +123,7 @@ init
 
 update
 {
-    if (version == "unknown")
+    if (version == "Unknown")
         return false;
 
     // カテゴリの動作モード
