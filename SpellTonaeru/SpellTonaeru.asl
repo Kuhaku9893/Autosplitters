@@ -1,4 +1,4 @@
-// ver1.1.1
+// ver1.2.0
 
 // ------------------------------------------------------------ //
 //          Initialization
@@ -35,6 +35,20 @@ state("game", "1.8.0")
 
     int igt :       "game.exe", 0x02D4F1C0, 0x348, 0x1c0, 0x38, 0x68, 0x28, 0x8;
     bool isBattle : "game.exe", 0x02D4F1C0, 0x348, 0x1c0, 0x38, 0x68, 0x28, 0x68;
+}
+state("game", "1.9.0")
+{
+    // memSize : 49123328
+    // fileVer : 1.0.0.0
+    // MD5Hash : E8723020BDD5DC7189F3780DC3D07D5C
+
+    int scene :     "game.exe", 0x02BEE090, 0x488, 0x1d0, 0x08, 0x68, 0x28, 0x1e8;
+    int ending :    "game.exe", 0x02BEE090, 0x398, 0x1d0, 0x78, 0x68, 0x28, 0x20;
+    int stage :     "game.exe", 0x02BEE090, 0x398, 0x1d0, 0x58, 0x68, 0x28, 0x8;
+    int pauseType : "game.exe", 0x02C25C80, 0x60, 0x288, 0x68, 0x28, 0x8;
+
+    int igt :       "game.exe", 0x02BEE090, 0x398, 0x1d0, 0x38, 0x68, 0x28, 0x8;
+    bool isBattle : "game.exe", 0x02BEE090, 0x398, 0x1d0, 0x38, 0x68, 0x28, 0x68;
 }
 
 startup
@@ -96,6 +110,10 @@ init
             break;
         case "234F4708B433222E587ACDFB69D1BB38":
             version = "1.8.0";
+            vars.sceneInitialStart = 11;
+            break;
+        case "E8723020BDD5DC7189F3780DC3D07D5C":
+            version = "1.9.0";
             vars.sceneInitialStart = 11;
             break;
         default:
