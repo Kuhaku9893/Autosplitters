@@ -47,7 +47,7 @@ AutosplitterはSplits Editorから使用する上記の方法と、Layout Editor
 
 
 ## 連絡先
-不具合報告、改善要望などありましたら、このページの Issues までお願いします。<br>
+不具合報告、改善要望などありましたら、[Issues](https://github.com/Kuhaku9893/Autosplitters/issues) までお願いします。<br>
 Issue のタイトルか本文中に、どのゲームタイトル用の Autosplitter についてなのかを明記してください。
 
 ただし、不具合や改善に対応する・できるとは限らないことをご了承ください。
