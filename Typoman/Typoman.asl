@@ -134,7 +134,6 @@ init
     // vars init
     vars.mainChap = 0;
     vars.subChap = 0;
-    vars.splitFlg = false;
     
     // for sig scan
     vars.scanStartedFlg = false;
@@ -182,8 +181,6 @@ update
         print("game : " + current.mainChap + "-" + current.subChap);
         print("vars : " + vars.mainChap + "-" + vars.subChap);
     }
-    
-    vars.splitFlg = false;
 }
 
 // Start when select chapter0-0 from the main menu
@@ -233,12 +230,7 @@ split
         if(current.subChap > vars.subChap)
         {
             if(settings[vars.mainChap.ToString() + "-" + vars.subChap.ToString()])
-                vars.splitFlg = true;
-            
-            vars.mainChap = current.mainChap;
-            vars.subChap = current.subChap;
-            print("vars : " + vars.mainChap + "-" + vars.subChap);
-            print("-- subChap --");
+                return true;
         }
     }
 
@@ -248,11 +240,7 @@ split
         if(current.mainChap > vars.mainChap)
         {
             if(settings["chapter" + vars.mainChap.ToString()])
-                vars.splitFlg = true;
-            vars.mainChap = current.mainChap;
-            vars.subChap = 0;
-            print("vars : " + vars.mainChap + "-" + vars.subChap);
-            print("-- mainChap --");
+                return true;
         }
     }
     
@@ -279,17 +267,32 @@ split
                 vars.split_3_13_flg = true;
                 
                 if(settings["chapter" + vars.mainChap.ToString()])
-                    vars.splitFlg = true;
+                    return true;
             }
         }
     }
-    
-    // split or not
-    if(vars.splitFlg)
+}
+onSplit
 {
-    print("-- split --");
+    // when change subChapter
+    if(current.subChap > vars.subChap)
+    {
+        vars.mainChap = current.mainChap;
+        vars.subChap = current.subChap;
+        print("vars : " + vars.mainChap + "-" + vars.subChap);
+        print("-- subChap --");
     }
-    return vars.splitFlg;
+
+    // when change mainChapter
+    if(current.mainChap > vars.mainChap)
+    {
+        vars.mainChap = current.mainChap;
+        vars.subChap = 0;
+        print("vars : " + vars.mainChap + "-" + vars.subChap);
+        print("-- mainChap --");
+    }
+
+    print("-- split --");
 }
 
 // ------------------------------------------------------------ //
