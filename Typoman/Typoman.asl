@@ -190,17 +190,18 @@ update
 // or the chapter selection menu
 start
 {
-    if(current.mainChap == 0 && current.subChap == 0
-       && !current.menuActiveFlg && old.menuActiveFlg)
-    {
-        print("-- start --");
-        vars.mainChap = 0;
-        vars.subChap = 0;
-        vars.scanStartedFlg = false;
-        vars.inPhase4Time = TimeSpan.Zero;
-        vars.split_3_13_flg = false;
-        return true;
-    }
+    return (current.mainChap == 0 && current.subChap == 0
+       && !current.menuActiveFlg && old.menuActiveFlg);
+}
+onStart
+{
+    vars.mainChap = 0;
+    vars.subChap = 0;
+    vars.scanStartedFlg = false;
+    vars.inPhase4Time = TimeSpan.Zero;
+    vars.split_3_13_flg = false;
+
+    print("-- start --");
 }
 
 // Reset when select chapter0-0 at the chapter selection menu
@@ -285,8 +286,8 @@ split
     
     // split or not
     if(vars.splitFlg)
-    {
-        print("-- split --");
+{
+    print("-- split --");
     }
     return vars.splitFlg;
 }
