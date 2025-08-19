@@ -1,4 +1,4 @@
-// ver.1.1.1
+// ver.1.1.0
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -134,6 +134,7 @@ init
     // vars init
     vars.mainChap = 0;
     vars.subChap = 0;
+    vars.splitFlg = false;
     
     // for sig scan
     vars.scanStartedFlg = false;
@@ -164,11 +165,8 @@ update
     if (vars.scanStartedFlg && !vars.threadScan.IsAlive)
         vars.watchersInGame.UpdateAll(game);
 
-    if (((IDictionary<string, object>)vars).ContainsKey("phase"))
-    {
-        if (vars.phase.Changed)
-            print("phase : " + vars.phase.Current);
-    }
+    if (vars.phase.Changed)
+        print("phase : " + vars.phase.Current);
 
     // Move from menu screen to game screen
     if(!current.menuActiveFlg && current.isGameModeFlg && !old.isGameModeFlg)
@@ -181,24 +179,25 @@ update
         print("game : " + current.mainChap + "-" + current.subChap);
         print("vars : " + vars.mainChap + "-" + vars.subChap);
     }
+    
+    vars.splitFlg = false;
 }
 
 // Start when select chapter0-0 from the main menu
 // or the chapter selection menu
 start
 {
-    return (current.mainChap == 0 && current.subChap == 0
-       && !current.menuActiveFlg && old.menuActiveFlg);
-}
-onStart
-{
-    vars.mainChap = 0;
-    vars.subChap = 0;
-    vars.scanStartedFlg = false;
-    vars.inPhase4Time = TimeSpan.Zero;
-    vars.split_3_13_flg = false;
-
-    print("-- start --");
+    if(current.mainChap == 0 && current.subChap == 0
+       && !current.menuActiveFlg && old.menuActiveFlg)
+    {
+        print("-- start --");
+        vars.mainChap = 0;
+        vars.subChap = 0;
+        vars.scanStartedFlg = false;
+        vars.inPhase4Time = TimeSpan.Zero;
+        vars.split_3_13_flg = false;
+        return true;
+    }
 }
 
 // Reset when select chapter0-0 at the chapter selection menu
@@ -230,7 +229,12 @@ split
         if(current.subChap > vars.subChap)
         {
             if(settings[vars.mainChap.ToString() + "-" + vars.subChap.ToString()])
-                return true;
+                vars.splitFlg = true;
+            
+            vars.mainChap = current.mainChap;
+            vars.subChap = current.subChap;
+            print("vars : " + vars.mainChap + "-" + vars.subChap);
+            print("-- subChap --");
         }
     }
 
@@ -240,7 +244,11 @@ split
         if(current.mainChap > vars.mainChap)
         {
             if(settings["chapter" + vars.mainChap.ToString()])
-                return true;
+                vars.splitFlg = true;
+            vars.mainChap = current.mainChap;
+            vars.subChap = 0;
+            print("vars : " + vars.mainChap + "-" + vars.subChap);
+            print("-- mainChap --");
         }
     }
     
@@ -267,32 +275,17 @@ split
                 vars.split_3_13_flg = true;
                 
                 if(settings["chapter" + vars.mainChap.ToString()])
-                    return true;
+                    vars.splitFlg = true;
             }
         }
     }
-}
-onSplit
-{
-    // when change subChapter
-    if(current.subChap > vars.subChap)
+    
+    // split or not
+    if(vars.splitFlg)
     {
-        vars.mainChap = current.mainChap;
-        vars.subChap = current.subChap;
-        print("vars : " + vars.mainChap + "-" + vars.subChap);
-        print("-- subChap --");
+        print("-- split --");
     }
-
-    // when change mainChapter
-    if(current.mainChap > vars.mainChap)
-    {
-        vars.mainChap = current.mainChap;
-        vars.subChap = 0;
-        print("vars : " + vars.mainChap + "-" + vars.subChap);
-        print("-- mainChap --");
-    }
-
-    print("-- split --");
+    return vars.splitFlg;
 }
 
 // ------------------------------------------------------------ //
