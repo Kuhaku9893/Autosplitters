@@ -1,4 +1,4 @@
-// ver.1.1.0
+// ver.1.1.1
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -165,8 +165,11 @@ update
     if (vars.scanStartedFlg && !vars.threadScan.IsAlive)
         vars.watchersInGame.UpdateAll(game);
 
-    if (vars.phase.Changed)
-        print("phase : " + vars.phase.Current);
+    if (((IDictionary<string, object>)current).ContainsKey("phase"))
+    {
+        if (vars.phase.Changed)
+            print("phase : " + vars.phase.Current);
+    }
 
     // Move from menu screen to game screen
     if(!current.menuActiveFlg && current.isGameModeFlg && !old.isGameModeFlg)
