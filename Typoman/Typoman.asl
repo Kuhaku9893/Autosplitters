@@ -1,4 +1,4 @@
-// ver.1.1.1
+// ver.1.1.2
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -7,16 +7,16 @@
 state("Typoman", "ver1.10")
 {
     // memSize : 23171072
-    int mainChap: "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x40;
-    int subChap: "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x44;
-    bool menuActiveFlg: "Typoman.exe", 0x0140DDE8, 0x8, 0x8, 0x10, 0x20, 0x29;
-    bool isGameModeFlg: "Typoman.exe", 0x0140DDE8, 0x8, 0x10, 0x20, 0x384;
+    int chapter: "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x40;
+    int segment: "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x44;
+    bool ismenuActive: "Typoman.exe", 0x0140DDE8, 0x8, 0x8, 0x10, 0x20, 0x29;
+    bool isGameMode: "Typoman.exe", 0x0140DDE8, 0x8, 0x10, 0x20, 0x384;
 }
 
 startup
 {
     // chap.0 : 0, 2 - 8
-    settings.Add("chapter0", true, "Prologue (8 sub-chapters)");
+    settings.Add("chapter0", true, "Prologue (8 segments)");
     settings.Add("0-0", true, "0-1", "chapter0");
     for (var index = 2; index < 8; ++index)
     {
@@ -27,7 +27,7 @@ startup
                         "Split \"Prologue\" equals split at the end of 0-8");
 
     // chap.1 : 0 - 9
-    settings.Add("chapter1", true, "Chapter.1 (10 sub-chapters)");
+    settings.Add("chapter1", true, "Chapter.1 (10 segments)");
     for (var index = 0; index < 9; ++index)
     {
         settings.Add("1-" + index.ToString(), true,
@@ -37,7 +37,7 @@ startup
                         "Split \"Chapter.1\" equals split at the end of 1-10");
 
     // chap.2 : 0 - 15
-    settings.Add("chapter2", true, "Chapter.2 (16 sub-chapters)");
+    settings.Add("chapter2", true, "Chapter.2 (16 segments)");
     for (var index = 0; index < 15; ++index)
     {
         var str = "";
@@ -61,7 +61,7 @@ startup
                         "Split \"Chapter.2\" equals split at the end of 1-16");
 
     // chap.3 : 0 - 12
-    settings.Add("chapter3", true, "Chapter.3 (13 sub-chapters)");
+    settings.Add("chapter3", true, "Chapter.3 (13 segments)");
     for (var index = 0; index < 12; ++index)
     {
         settings.Add("3-" + index.ToString(), true,
@@ -132,8 +132,8 @@ init
     });
     
     // vars init
-    vars.mainChap = 0;
-    vars.subChap = 0;
+    vars.chapter = 0;
+    vars.segment = 0;
     
     // for sig scan
     vars.scanStartedFlg = false;
@@ -153,8 +153,8 @@ update
         return false;
     
     // Reach 3-12 at first time, scan start
-    if (!vars.scanStartedFlg && current.isGameModeFlg && 
-        current.mainChap == 3 && current.subChap == 12)
+    if (!vars.scanStartedFlg && current.isGameMode && 
+        current.chapter == 3 && current.segment == 12)
     {
         vars.threadScan.Start();
         vars.scanStartedFlg = true;
@@ -171,29 +171,29 @@ update
     }
 
     // Move from menu screen to game screen
-    if(!current.menuActiveFlg && current.isGameModeFlg && !old.isGameModeFlg)
+    if(!current.ismenuActive && current.isGameMode && !old.isGameMode)
     {
-        vars.mainChap = current.mainChap;
-        vars.subChap = current.subChap;
+        vars.chapter = current.chapter;
+        vars.segment = current.segment;
         vars.inPhase4Time = TimeSpan.Zero;
         vars.split_3_13_flg = false;
         print("-- ini in update --");
-        print("game : " + current.mainChap + "-" + current.subChap);
-        print("vars : " + vars.mainChap + "-" + vars.subChap);
+        print("game : " + current.chapter + "-" + current.segment);
+        print("vars : " + vars.chapter + "-" + vars.segment);
     }
 }
 
-// Start when select chapter0-0 from the main menu
+// Start when select Chapter0-0 from the main menu
 // or the chapter selection menu
 start
 {
-    return (current.mainChap == 0 && current.subChap == 0
-       && !current.menuActiveFlg && old.menuActiveFlg);
+    return (current.chapter == 0 && current.segment == 0
+       && !current.ismenuActive && old.ismenuActive);
 }
 onStart
 {
-    vars.mainChap = 0;
-    vars.subChap = 0;
+    vars.chapter = 0;
+    vars.segment = 0;
     vars.scanStartedFlg = false;
     vars.inPhase4Time = TimeSpan.Zero;
     vars.split_3_13_flg = false;
@@ -201,52 +201,52 @@ onStart
     print("-- start --");
 }
 
-// Reset when select chapter0-0 at the chapter selection menu
+// Reset when select Chapter0-0 at the chapter selection menu
 reset
 {
-    if(current.mainChap == 0 && current.subChap == 0
-       && current.menuActiveFlg && !current.isGameModeFlg)
+    if(current.chapter == 0 && current.segment == 0
+       && current.ismenuActive && !current.isGameMode)
     {
         print("-- reset --");
         return true;
     }
 }
 
-// Split when changes main-chapter or sub-chapter
+// Split when changes Chapter or Segment
 split
 {
-    if(!current.menuActiveFlg)
+    if(!current.ismenuActive)
     {
-        if(current.subChap != old.subChap || current.mainChap != old.mainChap)
+        if(current.segment != old.segment || current.chapter != old.chapter)
         {
-            print("vars : " + vars.mainChap + "-" + vars.subChap);
-            print("game : " + current.mainChap + "-" + current.subChap);
+            print("vars : " + vars.chapter + "-" + vars.segment);
+            print("game : " + current.chapter + "-" + current.segment);
         }
     }
 
-    // when change subChapter
-    if(current.isGameModeFlg && current.subChap != old.subChap) 
+    // when change Segment
+    if(current.isGameMode && current.segment != old.segment) 
     {
-        if(current.subChap > vars.subChap)
+        if(current.segment > vars.segment)
         {
-            if(settings[vars.mainChap.ToString() + "-" + vars.subChap.ToString()])
+            if(settings[vars.chapter.ToString() + "-" + vars.segment.ToString()])
                 return true;
         }
     }
 
-    // when change mainChapter
-    if(current.isGameModeFlg && current.mainChap != old.mainChap) 
+    // when change Chapter
+    if(current.isGameMode && current.chapter != old.chapter) 
     {
-        if(current.mainChap > vars.mainChap)
+        if(current.chapter > vars.chapter)
         {
-            if(settings["chapter" + vars.mainChap.ToString()])
+            if(settings["chapter" + vars.chapter.ToString()])
                 return true;
         }
     }
     
     // Boss
-    if(current.isGameModeFlg && current.mainChap == 3 &&
-       current.subChap == 12 && !vars.threadScan.IsAlive)
+    if(current.isGameMode && current.chapter == 3 &&
+       current.segment == 12 && !vars.threadScan.IsAlive)
     {
         // phase 3 to 4 , when hit the final attack to the boss
         // timer stop at hero not able to move
@@ -266,7 +266,7 @@ split
             {
                 vars.split_3_13_flg = true;
                 
-                if(settings["chapter" + vars.mainChap.ToString()])
+                if(settings["chapter" + vars.chapter.ToString()])
                     return true;
             }
         }
@@ -274,22 +274,22 @@ split
 }
 onSplit
 {
-    // when change subChapter
-    if(current.subChap > vars.subChap)
+    // when change Segment
+    if(current.segment > vars.segment)
     {
-        vars.mainChap = current.mainChap;
-        vars.subChap = current.subChap;
-        print("vars : " + vars.mainChap + "-" + vars.subChap);
-        print("-- subChap --");
+        vars.chapter = current.chapter;
+        vars.segment = current.segment;
+        print("vars : " + vars.chapter + "-" + vars.segment);
+        print("-- segment --");
     }
 
-    // when change mainChapter
-    if(current.mainChap > vars.mainChap)
+    // when change Chapter
+    if(current.chapter > vars.chapter)
     {
-        vars.mainChap = current.mainChap;
-        vars.subChap = 0;
-        print("vars : " + vars.mainChap + "-" + vars.subChap);
-        print("-- mainChap --");
+        vars.chapter = current.chapter;
+        vars.segment = 0;
+        print("vars : " + vars.chapter + "-" + vars.segment);
+        print("-- chapter --");
     }
 
     print("-- split --");
