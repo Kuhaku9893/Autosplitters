@@ -16,6 +16,7 @@ Typoman用のAutosplitterです。
 - チャプター・セクションごとのスプリットON/OFF
 
 ### 対応バージョン
+- ver 1.12
 - ver 1.10
 
 
