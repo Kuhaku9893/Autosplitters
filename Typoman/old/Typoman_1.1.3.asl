@@ -7,12 +7,12 @@
 state("Typoman", "ver1.10")
 {
     // memSize : 23171072
-    int chapter:        "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x40;
-    int segment:        "Typoman.exe", 0x0135A9E0, 0xC, 0x10, 0x98, 0xD8, 0x44;
-    bool isMenuActive:  "Typoman.exe", 0x0140DDE8, 0x8, 0x8, 0x10, 0x20, 0x29;
+    int chapter:        "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x40;
+    int segment:        "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x44;
+    bool isMenuActive:  "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x1;
     bool isGameMode:    "Typoman.exe", 0x0140DDE8, 0x8, 0x10, 0x20, 0x384;
-    int bossPhase:      "Typoman.exe", 0x0135A9E0, 0xC, 0x388, 0x98, 0x450, 0x108;
-    bool forceRuinning: "Typoman.exe", 0x0135A9E0, 0xC, 0x388, 0x98, 0x450, 0x18, 0x485;
+    int bossPhase:      "Typoman.exe", 0x0135A9E0, 0x8C, 0x388, 0x98, 0x450, 0x108;
+    bool forceRuinning: "Typoman.exe", 0x0135A9E0, 0x8C, 0x388, 0x98, 0x450, 0x18, 0x485;
 }
 state("Typoman", "ver1.12")
 {
@@ -158,6 +158,7 @@ split
     {
         if(current.segment != old.segment || current.chapter != old.chapter)
         {
+            print("-- check in split --");
             print("vars : " + vars.chapter + "-" + vars.segment);
             print("game : " + current.chapter + "-" + current.segment);
         }
@@ -205,8 +206,8 @@ onSplit
     {
         vars.chapter = current.chapter;
         vars.segment = current.segment;
-        print("vars : " + vars.chapter + "-" + vars.segment);
         print("-- segment --");
+        print("vars : " + vars.chapter + "-" + vars.segment);
     }
 
     // when change Chapter
@@ -214,8 +215,8 @@ onSplit
     {
         vars.chapter = current.chapter;
         vars.segment = 0;
-        print("vars : " + vars.chapter + "-" + vars.segment);
         print("-- chapter --");
+        print("vars : " + vars.chapter + "-" + vars.segment);
     }
 
     print("-- split --");
