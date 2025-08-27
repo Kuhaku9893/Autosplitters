@@ -1,4 +1,4 @@
-// ver.1.1.3
+// ver.1.1.4
 
 // ------------------------------------------------------------ //
 //             Initialization
@@ -7,12 +7,12 @@
 state("Typoman", "ver1.10")
 {
     // memSize : 23171072
-    int chapter:        "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x40;
-    int segment:        "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x44;
-    bool isMenuActive:  "Typoman.exe", 0x0135A9E0, 0x8C, 0x10, 0x98, 0xD8, 0x1;
+    int chapter:        "Typoman.exe", 0x0135D818, 0x98, 0x1D8, 0x100, 0x0, 0x18, 0x40;
+    int segment:        "Typoman.exe", 0x0135D818, 0x98, 0x1D8, 0x100, 0x0, 0x18, 0x44;
+    bool isMenuActive:  "Typoman.exe", 0x0140DDE8, 0x8, 0x8, 0x10, 0x20, 0x29;
     bool isGameMode:    "Typoman.exe", 0x0140DDE8, 0x8, 0x10, 0x20, 0x384;
-    int bossPhase:      "Typoman.exe", 0x0135A9E0, 0x8C, 0x388, 0x98, 0x450, 0x108;
-    bool forceRuinning: "Typoman.exe", 0x0135A9E0, 0x8C, 0x388, 0x98, 0x450, 0x18, 0x485;
+    int bossPhase:      "Typoman.exe", 0x0140DCC0, 0x20, 0x20, 0x10, 0x98, 0x450, 0x108;
+    bool forceRuinning: "Typoman.exe", 0x0140DCC0, 0x20, 0x20, 0x10, 0x98, 0x450, 0x18, 0x485;
 }
 state("Typoman", "ver1.12")
 {
@@ -82,6 +82,18 @@ startup
     settings.SetToolTip("chapter3",
                         "Split \"Chapter.3\" equals split at the end of 1-13" +
                         ", and final split should manually");
+
+  // 全て監視
+  vars.WatchAll = (Action<IDictionary<string, object>, IDictionary<string, object>>)((oldLookup, currentLookup) =>
+  {
+    foreach (var key in currentLookup.Keys)
+    {
+      var oldValue     = oldLookup[key];
+      var currentValue = currentLookup[key];
+      if (!oldValue.Equals(currentValue))
+        print(string.Format("{0} : {1} -> {2}", key, oldValue, currentValue));
+    }
+  });
 }
 
 init
@@ -114,6 +126,9 @@ update
     if (version == "")
         return false;
 
+  // 全て監視
+  vars.WatchAll(old, current);
+  
     // Move from menu screen to game screen
     if(!current.isMenuActive && current.isGameMode && !old.isGameMode)
     {
