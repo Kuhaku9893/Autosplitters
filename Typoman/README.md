@@ -4,7 +4,7 @@
 ## 主な機能
 Typoman用のAutosplitterです。
 
-### All Tracks
+### revisedAny%
 |自動操作|説明|
 |:--|:--|
 |自動スタート|チャプター１の最初のセクションを選択した瞬間|
