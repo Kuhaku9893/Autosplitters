@@ -19,6 +19,9 @@ Beltmatic 用のAutoplitterです。
   - Level 20 ごと
   - Level 30 ごと
 
+### 対応バージョン
+- ver 1.0.10
+
 
 ## Autosplitterの使用方法
 

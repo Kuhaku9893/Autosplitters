@@ -1,4 +1,4 @@
-// ver0.0.1
+// ver1.0.0
 
 // ------------------------------------------------------------ //
 // 			Initialization
@@ -6,6 +6,7 @@
 
 state("Beltmatic")
 {
+    // game ver 1.0.9
     int level   : "GameAssembly.dll", 0x01A91B38, 0xaf0, 0x1f0, 0x30, 0x48, 0x18;
     long tick   : "GameAssembly.dll", 0x01A91B38, 0xaf0, 0x1f0, 0x30, 0x10;
 }
